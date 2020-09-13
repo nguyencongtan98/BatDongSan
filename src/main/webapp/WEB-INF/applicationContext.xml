@@ -1,0 +1,42 @@
+
+<b:beans xmlns="http://www.springframework.org/schema/security"
+         xmlns:b="http://www.springframework.org/schema/beans"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://www.springframework.org/schema/beans
+         http://www.springframework.org/schema/beans/spring-beans.xsd
+         http://www.springframework.org/schema/security
+         http://www.springframework.org/schema/security/spring-security.xsd">
+
+    <b:bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+        <b:property name="driverClassName" value="com.mysql.jdbc.Driver" />
+        <b:property name="url" value="jdbc:mysql://localhost:3306/totnghiep2?characterEncoding=UTF-8" />
+        <b:property name="username" value="root" />
+        <b:property name="password" value="123456" />
+    </b:bean>
+
+
+    <b:bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+        <b:property name="host" value="smtp.gmail.com"/>
+        <b:property name="port" value="25"/>
+        <b:property name="username" value="admin@gmail.com"/>
+        <b:property name="password" value="password"/>
+        <b:property name="javaMailProperties">
+            <b:props>
+                <b:prop key="mail.transport.protocol">smtp</b:prop>
+                <b:prop key="mail.smtp.auth">true</b:prop>
+                <b:prop key="mail.smtp.starttls.enable">true</b:prop>
+                <b:prop key="mail.debug">true</b:prop>
+            </b:props>
+        </b:property>
+    </b:bean>
+
+    <!-- We can have some pre-configured messagess also which are ready to send -->
+
+    <b:bean id="preConfiguredMessage" class="org.springframework.mail.SimpleMailMessage">
+        <b:property name="to" value="somebody@gmail.com"></b:property>
+        <b:property name="from" value="admin@gmail.com"></b:property>
+        <b:property name="subject" value="FATAL - Application crash. Save your job !!"/>
+    </b:bean>
+
+
+</b:beans>
